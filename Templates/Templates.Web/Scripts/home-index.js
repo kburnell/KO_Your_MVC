@@ -2,14 +2,14 @@
 
 $(function () {
     var data = [
-        new tagItem("Aston Martin", 1),
-        new tagItem("Audi", 2),
-        new tagItem("Bugatti", 3),
-        new tagItem("Ferrari", 4),
-        new tagItem("Koenigsegg", 5),
-        new tagItem("Lamborghini", 6),
-        new tagItem("McLaren", 7),
-        new tagItem("Porsche", 8)
+        {Id: 1, Name: "Aston Martin"},
+        {Id: 2, Name: "Audi"},
+        {Id: 3, Name: "Bugatti"},
+        {Id: 4, Name: "Ferrari"},
+        {Id: 5, Name: "Koenigsegg"},
+        {Id: 6, Name: "Lamborghini"},
+        {Id: 7, Name: "McLaren"},
+        {Id: 8, Name: "Porsche"}
     ];
 
     var viewModel = {
