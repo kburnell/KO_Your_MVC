@@ -31,6 +31,6 @@ D:\Dev\Presentations\KO_Your_MVC\Templates\Templates.Web\bin\System.Web.Razor.xm
 D:\Dev\Presentations\KO_Your_MVC\Templates\Templates.Web\bin\System.Web.WebPages.xml
 D:\Dev\Presentations\KO_Your_MVC\Templates\Templates.Web\bin\System.Web.WebPages.Deployment.xml
 D:\Dev\Presentations\KO_Your_MVC\Templates\Templates.Web\bin\System.Web.WebPages.Razor.xml
-D:\Dev\Presentations\KO_Your_MVC\Templates\Templates.Web\obj\Debug\Templates.Web.csprojResolveAssemblyReference.cache
 D:\Dev\Presentations\KO_Your_MVC\Templates\Templates.Web\obj\Debug\Templates.Web.dll
 D:\Dev\Presentations\KO_Your_MVC\Templates\Templates.Web\obj\Debug\Templates.Web.pdb
+D:\Dev\Presentations\KO_Your_MVC\Templates\Templates.Web\obj\Debug\Templates.Web.csprojResolveAssemblyReference.cache
