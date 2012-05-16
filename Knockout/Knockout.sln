@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knockout.Web", "Knockout.Web\Knockout.Web.csproj", "{C99AF8F0-85E7-45D3-9BDF-BF16C46D27C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C99AF8F0-85E7-45D3-9BDF-BF16C46D27C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99AF8F0-85E7-45D3-9BDF-BF16C46D27C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99AF8F0-85E7-45D3-9BDF-BF16C46D27C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99AF8F0-85E7-45D3-9BDF-BF16C46D27C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
