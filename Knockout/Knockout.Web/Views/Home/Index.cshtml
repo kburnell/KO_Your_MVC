@@ -4,7 +4,7 @@
         <h2 class="left">Manufacturers</h2>
     </div>
     <div class="box-content">
-        <input type="text" placeholder="Add New Manufacturer" data-bind="value: manufacturerToAdd, valueUpdate: 'afterkeydown'" />
+        <input type="text" placeholder="Add New Manufacturer" data-bind="value: manufacturerToAdd, valueUpdate: 'afterkeydown', executeOnEnter: addManufacturer" />
         <button data-bind="click: addManufacturer">+ Add</button>
         <ul data-bind="foreach: manufacturers">
             <li data-bind="click: $parent.selectManufacturer">
