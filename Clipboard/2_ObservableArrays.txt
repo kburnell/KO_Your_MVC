@@ -1,0 +1,37 @@
+* Step 1
+	<p>Array Count Is: <span ></span> Item's </p>
+	<button>Add</button>​
+
+	$(function() {
+	    var viewModel = {
+	        items: ko.observable(),
+	        add: function() {            
+	        }
+	    };
+	    ko.applyBindings(viewModel);
+	});​
+
+* Step 2
+	<p>Array Count Is: <span data-bind="text: items().length"></span></p>
+	<button>Add</button>
+
+	$(function() {
+	    var viewModel = {
+	        items: ko.observableArray(["Item1","Item2"])
+	    };
+	    ko.applyBindings(viewModel);
+	});​
+
+* Step 4
+	<p>Array Count Is: <span data-bind="text: items().length"></span></p>
+	<button data-bind="click: add">Add</button>
+
+	$(function() {
+	    var viewModel = {
+	        items: ko.observableArray(["Item1","Item2"]),
+	        add: function() {
+	            this.items.push("A New Item");            
+	        }
+	    };
+	    ko.applyBindings(viewModel);
+	});​

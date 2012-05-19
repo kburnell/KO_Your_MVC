@@ -1,0 +1,29 @@
+* Start *
+	My Dream Car Is A: <input type="text"/>
+	<p><span></span>'s Are SWEET!</p>
+	<button>Do It!</button>
+
+* Step 1 *
+	$(function() {
+	    var viewModel = {
+	        car: ko.observable("Pinto"),
+	        doIt: function() {
+	            this.car("Ferrari");            
+	        }
+	    };
+	    ko.applyBindings(viewModel);
+	});?
+
+	My Dream Car Is A: <input type="text" data-bind="value: car"/>
+	<p><span data-bind="text: car"></span>'s Are SWEET!</p>
+	<button data-bind="click: doIt">Ferrari!</button>
+
+* Step2 *** Update label on key press ***
+	, valueUpdate: 'afterkeydown'
+
+* Step3 *** Add a Checkbox, because we can ***
+	,carVisible: ko.observable(true)
+
+	<input type="checkbox" data-bind="checked: carVisible"/>
+
+	<p data-bind="visible: carVisible"><span data-bind="text: car"></span>'s Are SWEET!</p>

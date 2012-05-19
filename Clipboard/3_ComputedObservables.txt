@@ -1,0 +1,42 @@
+* Step 1
+	<input type="text" data-bind="value: firstName">
+	<input type="text" data-bind="value: lastName">
+
+	$(function() {
+	    var ViewModel = function (){
+	        this.firstName = ko.observable('Keith');
+	        this.lastName = ko.observable('Burnell');
+	    };
+	    ko.applyBindings(new ViewModel()); 
+	});
+
+* Step 2 *** Bind it up
+	<input type="text" data-bind="value: firstName">
+	<input type="text" data-bind="value: lastName">
+	<p>My Name Is: <span data-bind="text: fullName"></span></p>
+
+	$(function() {
+	    var ViewModel = function (){
+	        this.firstName = ko.observable('Keith');
+	        this.lastName = ko.observable('Burnell');
+	        this.fullName = this.firstName() + " " + this.lastName();
+	    };
+	    ko.applyBindings(new ViewModel()); 
+	});​
+
+* Step 3 *** Fancy It Up
+	<input type="text" data-bind="value: firstName, valueUpdate: 'afterkeydown'">
+	<input type="text" data-bind="value: lastName, valueUpdate: 'afterkeydown'">
+	<p>My Name Is: <span data-bind="text: fullName"></span></p>
+
+	$(function() {
+	    var ViewModel = function (){
+	        this.firstName = ko.observable('Keith');
+	        this.lastName = ko.observable('Burnell');
+	        this.fullName = ko.computed(function() {
+	            return this.firstName() + " " +
+	                this.lastName();
+	        }, this);
+	    };
+	    ko.applyBindings(new ViewModel()); 
+	});​

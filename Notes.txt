@@ -1,0 +1,327 @@
+Knockout
+
+- Intro
+	* What is MVVM
+	* Not a replacement for jQuery, CoffeeScript, etc.
+	* Knockout is a Javascript MVVM Framework
+	* Why do I need it?
+		- Declarative Bindings (along the lines of Silverlight/WPF)
+		- Automatic UI Refresh (Binding is two way)
+		- Dependent Properties
+		- Templating
+	* JSFiddle
+		- select "no wrap (body)"
+		- select jQuery 1.7.2
+		- Go out to Knockoutjs.com, click on Download (not in nav) and copy url
+		- Add Resource: paste in and click the '+'
+		- Simple intro to Knockout in JSFiddle...just to get our feet wet
+			* Start *
+				My Dream Car Is A: <input type="text"/>
+				<p><span></span>'s Are SWEET!</p>
+				<button>Do It!</button>
+
+			* Step 1 *
+				$(function() {
+				    var viewModel = {
+				        car: ko.observable("Pinto"),
+				        doIt: function() {
+				            this.car("Ferrari");            
+				        }
+				    };
+				    ko.applyBindings(viewModel);
+				});?
+
+				My Dream Car Is A: <input type="text" data-bind="value: car"/>
+				<p><span data-bind="text: car"></span>'s Are SWEET!</p>
+				<button data-bind="click: doIt">Ferrari!</button>
+
+			* Step2 *** Update label on key press ***
+				, valueUpdate: 'afterkeydown'
+
+			* Step3 *** Add a Checkbox, because we can ***
+				,carVisible: ko.observable(true)
+				<input type="checkbox" data-bind="checked: carVisible"/>
+				<p data-bind="visible: carVisible"><span data-bind="text: car"></span>'s Are SWEET!</p>
+
+- Observables
+	* What are observables
+		- Special JavaScript objects that can notify subscribers of changes and can automatically detect changes.
+		- The whole point is that they can be **observed**
+
+	* Because not all browsers support JavaScript getters and setters observables in Knockout are functions.
+		- ** Type out in notepad or something
+		- Read: viewModel.car();
+		- Write: viewModel.car('Gremlin');
+			* Supports Chaining: viewModel.car('Gremlin').year('1974');
+
+	* Types of Observables
+		- observable: 
+			* simple view model properties (like in our example)
+			
+		- observable arrays: 
+			* used for collections (think of ObservableCollection in .NET)
+			* Notified when the collection changes (add, remove, but not modify)
+			* Step 1
+				<p>Array Count Is: <span ></span> Item's </p>
+				<button>Add</button>​
+
+				$(function() {
+				    var viewModel = {
+				        items: ko.observable(),
+				        add: function() {            
+				        }
+				    };
+				    ko.applyBindings(viewModel);
+				});​
+
+			* Step 2
+				<p>Array Count Is: <span data-bind="text: items().length"></span></p>
+				<button>Add</button>
+
+				$(function() {
+				    var viewModel = {
+				        items: ko.observableArray(["Item1","Item2"])
+				    };
+				    ko.applyBindings(viewModel);
+				});​
+
+			* Step 4
+				<p>Array Count Is: <span data-bind="text: items().length"></span></p>
+				<button data-bind="click: add">Add</button>
+
+				$(function() {
+				    var viewModel = {
+				        items: ko.observableArray(["Item1","Item2"]),
+				        add: function() {
+				            this.items.push("A New Item");            
+				        }
+				    };
+				    ko.applyBindings(viewModel);
+				});​
+
+
+		- dependent observables(old name)/ computed observables(new name)
+			* functions that are dependent on one or more other observables
+			* will automatically update whenever any of these dependencies change
+			* need to manage the 'this' pointer
+			* Step 1
+				<input type="text" data-bind="value: firstName">
+				<input type="text" data-bind="value: lastName">
+
+				$(function() {
+				    var ViewModel = function (){
+				        this.firstName = ko.observable('Keith');
+				        this.lastName = ko.observable('Burnell');
+				    };
+				    ko.applyBindings(new ViewModel()); 
+				});
+
+	        * Step 2
+        		<input type="text" data-bind="value: firstName">
+				<input type="text" data-bind="value: lastName">
+				<p>My Name Is: <span data-bind="text: fullName"></span></p>
+
+				$(function() {
+				    var ViewModel = function (){
+				        this.firstName = ko.observable('Keith');
+				        this.lastName = ko.observable('Burnell');
+				        this.fullName = this.firstName() + " " + this.lastName();
+				    };
+				    ko.applyBindings(new ViewModel()); 
+				});​
+
+			* Step 3
+				<input type="text" data-bind="value: firstName, valueUpdate: 'afterkeydown'">
+				<input type="text" data-bind="value: lastName, valueUpdate: 'afterkeydown'">
+				<p>My Name Is: <span data-bind="text: fullName"></span></p>
+
+				$(function() {
+				    var ViewModel = function (){
+				        this.firstName = ko.observable('Keith');
+				        this.lastName = ko.observable('Burnell');
+				        this.fullName = ko.computed(function() {
+				            return this.firstName() + " " +
+				                this.lastName();
+				        }, this);
+				    };
+				    ko.applyBindings(new ViewModel()); 
+				});​
+
+- Visual Studio ASP.NET MVC
+	* next set of examples will be in Visual Studio
+	* knockoutjs is included out of the box with MVC4
+	* other versions of MVC install via NuGet: 'install-package knockoutjs'
+
+- Bindings
+
+	* Text and Appearance
+		- Types
+			- visible
+			- text
+			- html
+			- css
+			- style
+			- attr
+		- Example: Covered in our intro jsFiddle example
+
+
+	* Templates
+		- Leading In
+			* Talk about structure of application
+			* Show Index.cshtml, home-index.js
+				- describe why the ///references is at the top
+
+		- Jquery Templates
+			- jQuery.tmpl.js (https://github.com/jquery/jquery-tmpl)
+			- Copy <ul> out into script tag at bottom of file
+				* <script id="manufacturersTemplate" type="text/html"></script>
+			- Replace UL 
+				* <ul> with: {{each manufacturers}}
+				* </ul> with: {{/each}}
+			- Set SPAN Binding
+				* <span>${Name}</span>
+			- Add container for the template after button
+				* <div data-bind="template: 'manufacturersTemplate'"></div>
+			- Run!
+			- To finish off:
+				* Set databind of text box: 
+					data-bind="value: manufacturerToAdd, valueUpdate: 'afterkeydown'"
+				* And button
+					data-bind="click: addManufacturer"
+				* Run and perform and add--- DOH! Textbox does not clear out
+					this.manufacturerToAdd(""); in addManufacturer event
+			- Issue with this approach
+				* When embedding the each inside the template
+				* <span>${Name} ${(new Date).toLocaleTimeString()}</span>
+				* Refresh you see everything has same time stamp
+				* Add a new item
+				* Everything was updated to new timestamp!
+					- entire template had be re-drawn
+					- will not scale well
+			- Better approach
+				* replace 
+					- <div data-bind="template: 'manufacturersTemplate'"></div>
+						* with <ul data-bind="template: {name: 'manufacturersTemplate', foreach: manufacturers}"></ul>
+				* remove <ul></ul> from template
+				* run
+				* add new: only new item was rendered.
+
+		- Native Knockout templates
+			* Remove reference to jQuery templates in _Layout.cshtml
+			* Remove contents of <span></span>
+			* data-bind <span data-bind="text: Name"></span>
+			* easy as pie!
+
+		- Templates: Wrap Up
+			* We learned jQuery templates (which are no longer actively being developed) are not as clean as native Knockout templates
+			* But his approach is still not very clean
+				- mark up is messy (ul with li's)
+				- requires template to exist in a separate scrip tag
+				- nested templates make it even worse
+
+	* Control Flow Bindings
+		- Types
+			- if
+			- ifnot
+			- foreach
+			- with
+	    EXAMPLE: ForEach
+		- Containerless / Comment Based Binding
+			* Modify Code
+				- Copy: <li></li> out of template in to <ul></ul>
+				- Remove: data-bind from <ul>
+				- Add: <!-- ko foreach: tags --> between <ul><li>
+				- Add: <!-- /ko --> between </li></ul> 
+			* Outcome
+				- <li>s are now in the <ul> where they belong
+				- no more template in a script block
+				- but comment syntax is just weird
+		- foreach Binding
+			* Modify Code
+				- Remove comment based binding
+				- Add to <ul>: data-bind="foreach: manufacturers"
+			* Outcome
+				- Clean template binding 
+			* Same concept can be done with 
+				- if
+				- ifnot
+				- with
+
+	* Forms Bindings
+		= Types
+			- click
+			- event
+			- submit
+			- enable
+			- disable
+			- value
+			- checked
+			- options
+			- selectedOptions (dropdown, mult-select)
+			- uniqueName
+		- Example: Event
+			* In older versions of Knockout you would have seen something like:
+				- data-bind="click: function() {viewModel.Manufacturers.remove(this)}"
+				- noisy, looks like Javascript event wire up
+			* Now: jQuery-style Event Handling
+				- home-index
+					* use jQuery "on" method [replaces "live" method as of jQuery 1.7]
+					* have the "manufacturer-delete" and "manufacturer-edit" classes in place and will use css selector to attach event
+					* $(document).on("click", ".manufacturer-delete", function () {
+
+					  });
+					* ADD: var itemToRemove = ko.dataFor(this);
+						- "this" refers to DOM element databinding to (element with class = manufacturer-delete)
+						- .datafor is extracting viewmodel element that is currently databound to the DOM element
+					* ADD: viewModel.Manufacturers.remove(itemToRemove);
+					* RESULT: Nice clean event wire up, No snooping around the DOM for the data we are looking for
+
+	* Parent Binding Contexts
+		- Types
+			* $data: current data bound item
+			* $parent: item from parent binding context
+			* $parents: array containing all parent binding contexts
+			* $root: the top level context
+		- Example:
+			* Get Selected Item
+				- home-index.js
+					* Add: "selectedManufacturer: ko.observable(null)," to viewModel
+					* Add: ",selectManufacturer: function () {
+					            viewModel.selectedManufacturer(this);
+					        }" after addManufacturer function
+		        - Index.cshtml
+		        	* Add: data-bind="click: selectManufacturer" to <li>
+		        	* Run: Error (look at dev tools to view error)
+		        		   Error is because at this point we are in a single Manufacturer at the event exists a level up
+        		- Resolution:   
+        			* Add: "$parent." to <li data-bind="click: selectManufacturer">
+
+	* Custom Bindings
+		- The Most Useful Extesibility Point of Knockout
+		- Example from Knockout website
+			ko.bindingHandlers.yourBindingName = {
+			    init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+			        // This will be called when the binding is first applied to an element
+			        // Set up any initial state, event handlers, etc. here
+			    },
+			    update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+			        // This will be called once when the binding is first applied to an element,
+			        // and again whenever the associated observable changes value.
+			        // Update the DOM element based on the supplied values here.
+			    }
+			};
+		- Example: Click add button on "enter"
+			* Create script file: ko-execute-on-enter.js (copy from Clipboard in sln folder)
+			* Add reference to new script in _Layout (<script src="@Url.Content("~/Scripts/ko-execute-on-enter.js")" type="text/javascript"></script>)
+			* Custom bindings allowed me to create a truly usable binding and keep my markup clean
+
+
+
+
+
+- References
+	* Official Knockout website (http://www.knockoutjs.com)
+	* Steve Sanderson's blog (http://blog.stevensanderson.com/)
+	* KnockMeOut.net
+	* StackOverflow (http://www.stackoverflow.com/questions/tagged/knockoutjs)
+	* Knockout Google Group (http://www.groups.google.com/group/knockoutjs)
