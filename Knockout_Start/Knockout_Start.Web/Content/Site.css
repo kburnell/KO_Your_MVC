@@ -479,15 +479,15 @@ button:disabled {
 }
 #manufacturersList {
   float: left;
-  width: 240px;
+  width: 540px;
 }
 #modelsList {
   float: left;
-  width: 300px;
+  width: 500px;
 }
 #modelDetail {
   float: left;
-  width: 330px;
+  width: 530px;
 }
 .editor-label label {
   display: block;
