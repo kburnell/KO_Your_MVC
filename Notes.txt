@@ -1,9 +1,9 @@
 Knockout
 
 - Intro
-	* What is MVVM
 	* Not a replacement for jQuery, CoffeeScript, etc.
 	* Knockout is a Javascript MVVM Framework
+	* What is MVVM
 	* Why do I need it?
 		- Declarative Bindings (along the lines of Silverlight/WPF)
 		- Automatic UI Refresh (Binding is two way)
@@ -191,12 +191,16 @@ Knockout
 				* Run and perform and add--- DOH! Textbox does not clear out
 					this.manufacturerToAdd(""); in addManufacturer event
 			- Issue with this approach
+				* First Off: It Looks Strange!
 				* When embedding the each inside the template
 				* <span>${Name} ${(new Date).toLocaleTimeString()}</span>
 				* Refresh you see everything has same time stamp
 				* Add a new item
 				* Everything was updated to new timestamp!
-					- entire template had be re-drawn
+					- entire template had be re-rendered
+					- now imagine you had something complex going on
+					  like you where doing some ajax calls for each
+					  list element...POOR PERFORMANCE
 					- will not scale well
 			- Better approach
 				* replace 
@@ -205,6 +209,10 @@ Knockout
 				* remove <ul></ul> from template
 				* run
 				* add new: only new item was rendered.
+			- Closing: jQuery Templates
+				* These are jQuery templates that unforunately use the
+				  jquery.tmpl library which is no longer being actively
+				  developed
 
 		- Native Knockout templates
 			* Remove reference to jQuery templates in _Layout.cshtml
