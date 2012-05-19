@@ -1,0 +1,32 @@
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section featured {
+<section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title"></hgroup>
+        <p>Applying KnockoutJS to ASP.NET MVC 4</p>
+    </div>
+</section>
+}
+
+<h2 style="margin-bottom: 20px;">Dream Car Wish List!</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width: 100px; text-align: left">Year</th>
+            <th style="width: 100px; text-align: left">Make</th>
+            <th style="width: 300px; text-align: left">Model</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: dreamcars">
+        <tr>
+            <td><span data-bind="text: Year"></span></td>
+            <td><span data-bind="text: Make"></span></td>
+            <td><span data-bind="text: Model"></span></td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="@Url.Content("~/Scripts/KnockoutMVC/home-index.js")" type="text/javascript"></script>
