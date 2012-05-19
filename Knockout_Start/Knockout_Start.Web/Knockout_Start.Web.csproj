@@ -137,6 +137,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\button.gif" />
+    <Content Include="Content\images\del.gif" />
+    <Content Include="Content\images\edit.gif" />
+    <Content Include="Content\images\footer.gif" />
+    <Content Include="Content\images\header.gif" />
+    <Content Include="Content\images\tab.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />

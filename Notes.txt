@@ -152,7 +152,7 @@ Knockout
 	* knockoutjs is included out of the box with MVC4
 	* other versions of MVC install via NuGet: 'install-package knockoutjs'
 
-- Bindings
+- Bindings (6 Flavors)
 
 	* Text and Appearance
 		- Types
