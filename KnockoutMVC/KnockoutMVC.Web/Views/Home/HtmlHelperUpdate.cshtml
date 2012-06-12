@@ -1,0 +1,38 @@
+@using KnockoutMVC.Web.Models
+@model DreamCar
+@{
+    ViewBag.Title = "Html Helper";
+}
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title"></hgroup>
+            <p>Applying KnockoutJS to ASP.NET MVC 4 : HTML Helpers</p>
+        </div>
+    </section>
+}
+
+<h2 style="margin-bottom: 20px;">Dream Car Wish List!</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width: 100px; text-align: left">Year</th>
+            <th style="width: 100px; text-align: left">Make</th>
+            <th style="width: 300px; text-align: left">Model</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.TextBoxFor(car => car.Year, new {data_bind = "value: Year"})</td>
+            <td>@Html.TextBoxFor(car => car.Year, new {data_bind = "value: Make"})</td>
+            <td>@Html.TextBoxFor(car => car.Model, new {data_bind = "value: Model"})</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayFor(car => car.Year, new {data_bind = "value: Year"})</td>
+            <td>@Html.DisplayFor(car => car.Year, new {data_bind = "value: Make"})</td>
+            <td>@Html.DisplayFor(car => car.Model, new {data_bind = "value: Model"})</td>
+        </tr>
+    </tbody>
+</table>
+
