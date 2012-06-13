@@ -14,6 +14,8 @@ Knockout
 		- select jQuery 1.7.2
 		- Go out to Knockoutjs.com, click on Download (not in nav) and copy url
 		- Add Resource: paste in and click the '+'
+
+		
 		- Simple intro to Knockout in JSFiddle...just to get our feet wet
 			* Start *
 				My Dream Car Is A: <input type="text"/>
@@ -29,7 +31,7 @@ Knockout
 				        }
 				    };
 				    ko.applyBindings(viewModel);
-				});?
+				});
 
 				My Dream Car Is A: <input type="text" data-bind="value: car"/>
 				<p><span data-bind="text: car"></span>'s Are SWEET!</p>
