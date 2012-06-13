@@ -4,6 +4,8 @@
     ViewBag.Title = "Html Helper";
 }
 
+
+
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
@@ -24,15 +26,24 @@
     </thead>
     <tbody>
         <tr>
-            <td>@Html.TextBoxFor(car => car.Year, new {data_bind = "value: Year"})</td>
-            <td>@Html.TextBoxFor(car => car.Year, new {data_bind = "value: Make"})</td>
-            <td>@Html.TextBoxFor(car => car.Model, new {data_bind = "value: Model"})</td>
+            <td>@Html.TextBoxFor(car => car.Year, new {data_bind = "value: year"})</td>
+            <td>@Html.TextBoxFor(car => car.Make, new {data_bind = "value: make"})</td>
+            <td>@Html.TextBoxFor(car => car.Model, new {data_bind = "value: model"})</td>
         </tr>
-        <tr>
-            <td>@Html.DisplayFor(car => car.Year, new {data_bind = "value: Year"})</td>
-            <td>@Html.DisplayFor(car => car.Year, new {data_bind = "value: Make"})</td>
-            <td>@Html.DisplayFor(car => car.Model, new {data_bind = "value: Model"})</td>
+        <tr style="margin-top: 20px;">
+            <td colspan="3"><span data-bind = "text: year"></span>&nbsp;<span data-bind = "text: make"></span>&nbsp;<span data-bind = "text: model"></span></td>
         </tr>
+
     </tbody>
 </table>
+
+    <script type="text/javascript">
+        window.dreamCarForm = {
+            id: '@Model.Id',
+            make: '@Model.Make',
+            model: '@Model.Model',
+            year: '@Model.Year'
+        };
+    </script>
+    <script src="@Url.Content("~/Scripts/KnockoutMVC/htmlhelperupdate.js")" type="text/javascript"> </script>
 

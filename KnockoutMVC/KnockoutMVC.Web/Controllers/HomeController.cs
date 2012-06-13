@@ -30,6 +30,6 @@ namespace KnockoutMVC.Web.Controllers {
             DreamCar dc = (new DreamCar { Id = 2, Year = 1967, Make = "Ford", Model = "Shelby Mustang GT 500" });
             return View(dc);
         }
-
+        
     }
 }

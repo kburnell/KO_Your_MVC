@@ -2,13 +2,37 @@ Knockout
 
 - Intro
 	* Not a replacement for jQuery, CoffeeScript, etc.
-	* Knockout is a Javascript MVVM Framework
+	* Knockout 
+		- Created by Steven Sanderson
+		- Goal: Simplify dynamic JS UI's with the use of MVVM 
+		- is a JavaScript MVVM framework
+		- because it is a pure JavaScript framework it works with any web development framework
+		- open source (GitHub)
+		- With the relase of VS2012 it will be officially supported by Microsoft
+
 	* What is MVVM
+		- Talk about the layers starting at the top
+		- Key: Any server-side technology.  This is still .NET/MVC or Rub/Rails or PHP or whatever on the server side
+
 	* Why do I need it?
 		- Declarative Bindings (along the lines of Silverlight/WPF)
 		- Automatic UI Refresh (Binding is two way)
 		- Dependent Properties
 		- Templating
+
+- Observables
+	* Core concept/functionality of Knockout
+
+	* What are observables
+		- Special JavaScript objects that can notify subscribers of changes and can automatically detect changes.
+		- The whole point is that they can be **observed**
+
+	* Because not all browsers support JavaScript getters and setters observables in Knockout are functions.
+		- ** Type out in notepad or something
+		- Read: viewModel.car();
+		- Write: viewModel.car('Gremlin');
+			* Supports Chaining: viewModel.car('Gremlin').year('1974');
+
 	* JSFiddle
 		- select "no wrap (body)"
 		- select jQuery 1.7.2
@@ -17,13 +41,23 @@ Knockout
 
 		
 		- Simple intro to Knockout in JSFiddle...just to get our feet wet
-			* Start *
+			* Start * (Knockout_1_Start)
+				*** HTML ***
 				My Dream Car Is A: <input type="text"/>
 				<p><span></span>'s Are SWEET!</p>
 				<button>Do It!</button>
 
-			* Step 1 *
+				*** JavaScript ***
 				$(function() {
+				    
+				});
+
+				** Discuss what you have in both pieces
+
+			* Step 1 *
+				* Create a VM
+				
+				*** JavaScript ***
 				    var viewModel = {
 				        car: ko.observable("Pinto"),
 				        doIt: function() {
@@ -31,8 +65,8 @@ Knockout
 				        }
 				    };
 				    ko.applyBindings(viewModel);
-				});
 
+				*** HTML ***
 				My Dream Car Is A: <input type="text" data-bind="value: car"/>
 				<p><span data-bind="text: car"></span>'s Are SWEET!</p>
 				<button data-bind="click: doIt">Ferrari!</button>
@@ -45,109 +79,79 @@ Knockout
 				<input type="checkbox" data-bind="checked: carVisible"/>
 				<p data-bind="visible: carVisible"><span data-bind="text: car"></span>'s Are SWEET!</p>
 
-- Observables
-	* What are observables
-		- Special JavaScript objects that can notify subscribers of changes and can automatically detect changes.
-		- The whole point is that they can be **observed**
-
-	* Because not all browsers support JavaScript getters and setters observables in Knockout are functions.
-		- ** Type out in notepad or something
-		- Read: viewModel.car();
-		- Write: viewModel.car('Gremlin');
-			* Supports Chaining: viewModel.car('Gremlin').year('1974');
 
 	* Types of Observables
-		- observable: 
+		- (standard/simple) observable: 
 			* simple view model properties (like in our example)
 			
 		- observable arrays: 
 			* used for collections (think of ObservableCollection in .NET)
 			* Notified when the collection changes (add, remove, but not modify)
+			** Knockout_ObservableArrays_Start
+			
 			* Step 1
-				<p>Array Count Is: <span ></span> Item's </p>
-				<button>Add</button>​
 
-				$(function() {
-				    var viewModel = {
-				        items: ko.observable(),
-				        add: function() {            
-				        }
-				    };
-				    ko.applyBindings(viewModel);
-				});​
+				*** JavaScript ***
+				items: ko.observableArray(["Item1","Item2"])
 
-			* Step 2
+			    ko.applyBindings(viewModel);
+
+				*** HTML ***
 				<p>Array Count Is: <span data-bind="text: items().length"></span></p>
-				<button>Add</button>
-
-				$(function() {
-				    var viewModel = {
-				        items: ko.observableArray(["Item1","Item2"])
-				    };
-				    ko.applyBindings(viewModel);
-				});​
+				
 
 			* Step 4
-				<p>Array Count Is: <span data-bind="text: items().length"></span></p>
+
+				*** JavaScript ***
+		        ,add: function() {
+		            this.items.push("A New Item");            
+		        }
+
+		        *** HTML ***
 				<button data-bind="click: add">Add</button>
 
-				$(function() {
-				    var viewModel = {
-				        items: ko.observableArray(["Item1","Item2"]),
-				        add: function() {
-				            this.items.push("A New Item");            
-				        }
-				    };
-				    ko.applyBindings(viewModel);
-				});​
-
-
+				
 		- dependent observables(old name)/ computed observables(new name)
 			* functions that are dependent on one or more other observables
 			* will automatically update whenever any of these dependencies change
 			* need to manage the 'this' pointer
+
 			* Step 1
+
+				
+				*** JavaScript ***
+				*** DEPENDENT OBSERVABLES are DIFFERENT...IT'S OK
+			    var ViewModel = function (){
+			        this.firstName = ko.observable('Keith');
+			        this.lastName = ko.observable('Burnell');
+			    };
+			    ko.applyBindings(new ViewModel()); 
+
+		    	*** HTML ***
 				<input type="text" data-bind="value: firstName">
 				<input type="text" data-bind="value: lastName">
 
-				$(function() {
-				    var ViewModel = function (){
-				        this.firstName = ko.observable('Keith');
-				        this.lastName = ko.observable('Burnell');
-				    };
-				    ko.applyBindings(new ViewModel()); 
-				});
-
 	        * Step 2
-        		<input type="text" data-bind="value: firstName">
-				<input type="text" data-bind="value: lastName">
+
+	        	*** JavaScript ***
+	        	this.fullName = this.firstName() + " " + this.lastName();
+
+	        	*** HTML ***
 				<p>My Name Is: <span data-bind="text: fullName"></span></p>
 
-				$(function() {
-				    var ViewModel = function (){
-				        this.firstName = ko.observable('Keith');
-				        this.lastName = ko.observable('Burnell');
-				        this.fullName = this.firstName() + " " + this.lastName();
-				    };
-				    ko.applyBindings(new ViewModel()); 
-				});​
+			    ***** WORKS - But Not Really - Doesn't Update Automatically
+				    
 
 			* Step 3
-				<input type="text" data-bind="value: firstName, valueUpdate: 'afterkeydown'">
-				<input type="text" data-bind="value: lastName, valueUpdate: 'afterkeydown'">
-				<p>My Name Is: <span data-bind="text: fullName"></span></p>
 
-				$(function() {
-				    var ViewModel = function (){
-				        this.firstName = ko.observable('Keith');
-				        this.lastName = ko.observable('Burnell');
-				        this.fullName = ko.computed(function() {
-				            return this.firstName() + " " +
-				                this.lastName();
-				        }, this);
-				    };
-				    ko.applyBindings(new ViewModel()); 
-				});​
+				*** JavaScript ***
+		        this.fullName = ko.computed(function() {
+		            return this.firstName() + " " +
+		                this.lastName();
+		        }, this);
+
+		        *** First parameter represents the function that is doing the computation
+		        *** Second is 'this'...just because :)
 
 - Visual Studio ASP.NET MVC
 	* next set of examples will be in Visual Studio

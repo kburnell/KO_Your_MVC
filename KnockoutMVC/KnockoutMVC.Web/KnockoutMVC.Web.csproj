@@ -212,6 +212,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\KnockoutMVC\htmlhelperupdate.js" />
     <Content Include="Scripts\KnockoutMVC\home-index.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
     <Content Include="Web.config" />
