@@ -3,7 +3,6 @@
 
 ko.bindingHandlers.executeOnEnter = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-        alert('you are here');
         var value = valueAccessor();
         $(element).keypress(function(event) {
             var keyCode = (event.which ? event.which : event.keyCode);

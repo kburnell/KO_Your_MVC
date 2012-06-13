@@ -158,6 +158,7 @@ Knockout
 	* knockoutjs is included out of the box with MVC4
 	* other versions of MVC install via NuGet: 'install-package knockoutjs'
 
+
 - Bindings (6 Flavors)
 
 	* Text and Appearance
@@ -176,8 +177,10 @@ Knockout
 			* Talk about structure of application
 			* Show Index.cshtml, home-index.js
 				- describe why the ///references is at the top
+				- Show VM and what it includes
+				- Same for Index
 
-		- Jquery Templates
+		- Jquery Templates (this can be cut depending on time!)
 			- jQuery.tmpl.js (https://github.com/jquery/jquery-tmpl)
 			- Copy <ul> out into script tag at bottom of file
 				* <script id="manufacturersTemplate" type="text/html"></script>
@@ -196,23 +199,26 @@ Knockout
 					data-bind="click: addManufacturer"
 				* Run and perform and add--- DOH! Textbox does not clear out
 					this.manufacturerToAdd(""); in addManufacturer event
+
 			- Issue with this approach
 				* First Off: It Looks Strange!
-				* When embedding the each inside the template
-				* <span>${Name} ${(new Date).toLocaleTimeString()}</span>
-				* Refresh you see everything has same time stamp
-				* Add a new item
-				* Everything was updated to new timestamp!
-					- entire template had be re-rendered
-					- now imagine you had something complex going on
-					  like you where doing some ajax calls for each
-					  list element...POOR PERFORMANCE
-					- will not scale well
+				* But there is HUGE performance hit taking place here!
+					* When embedding the each inside the template
+						* <span>${Name} ${(new Date).toLocaleTimeString()}</span>
+						* Refresh you see everything has same time stamp
+						* Add a new item
+						* Everything was updated to new timestamp!
+							- entire template had be re-rendered
+							- now imagine you had something complex going on
+					  			like you where doing some ajax calls for each
+					  			list element...POOR PERFORMANCE
+							- will not scale well
+
 			- Better approach
 				* replace 
 					- <div data-bind="template: 'manufacturersTemplate'"></div>
 						* with <ul data-bind="template: {name: 'manufacturersTemplate', foreach: manufacturers}"></ul>
-				* remove <ul></ul> from template
+				* remove {{each manufacturers}}/{{/each}} from template
 				* run
 				* add new: only new item was rendered.
 			- Closing: jQuery Templates
@@ -229,8 +235,8 @@ Knockout
 		- Templates: Wrap Up
 			* We learned jQuery templates (which are no longer actively being developed) are not as clean as native Knockout templates
 			* But his approach is still not very clean
-				- mark up is messy (ul with li's)
-				- requires template to exist in a separate scrip tag
+				- mark up is messy (ul with/out li's --- li's are in template!?)
+				- requires template to exist in a separate script tag
 				- nested templates make it even worse
 
 	* Control Flow Bindings
@@ -239,17 +245,20 @@ Knockout
 			- ifnot
 			- foreach
 			- with
+
 	    EXAMPLE: ForEach
+
 		- Containerless / Comment Based Binding
 			* Modify Code
 				- Copy: <li></li> out of template in to <ul></ul>
 				- Remove: data-bind from <ul>
-				- Add: <!-- ko foreach: tags --> between <ul><li>
+				- Add: <!-- ko foreach: manufacturers --> between <ul><li>
 				- Add: <!-- /ko --> between </li></ul> 
 			* Outcome
 				- <li>s are now in the <ul> where they belong
 				- no more template in a script block
 				- but comment syntax is just weird
+
 		- foreach Binding
 			* Modify Code
 				- Remove comment based binding
@@ -273,10 +282,12 @@ Knockout
 			- options
 			- selectedOptions (dropdown, mult-select)
 			- uniqueName
+
 		- Example: Event
+			*** Let's wire up the Remove button
 			* In older versions of Knockout you would have seen something like:
-				- data-bind="click: function() {viewModel.Manufacturers.remove(this)}"
-				- noisy, looks like Javascript event wire up
+				- data-bind="click: function() {viewModel.Manufacturers.remove(this)}"  ** FYI: Doesn't Work in latest version!
+				- noisy, looks like y'olde Javascript event wire up
 			* Now: jQuery-style Event Handling
 				- home-index
 					* use jQuery "on" method [replaces "live" method as of jQuery 1.7]
